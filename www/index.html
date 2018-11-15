@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="assets/helpers/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="assets/css/app.css" rel="stylesheet">
+
+</head>
+<body onload=" ConvertCurrency();">
+
+
+    <header><h3>Currency Converter</h3></header>
+
+<section id="wrapper" class="container">
+    <form id="convert" role="form">
+
+        <div class="form-group">
+            <input id="fromAmount" type="number" data-type="number" class="form-control"  placeholder="Enter amount to convert" value="1" onkeyup="ConvertCurrency();" />
+        </div>
+
+        <div class="form-group">
+            <select name="from" id="from" class="form-control">
+                <option value="">Convert From</option>
+                <option value="USD">USD - United States Dollar</option>
+
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <select name="to" id="to" class="form-control">
+                <option value="">Convert To</option>
+                <option value="BRL">BRL - Brazil Real</option>
+                <option value="EUR">EUR - Euro Member Countries</option>
+                <option value="GBP">GBP - United Kingdom Pound</option>
+                <option value="USD">USD - United States Dollar</option>
+
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input id="submit" type="submit" class="btn btn-primary btn-block" value="Convert" />
+        </div>
+
+
+    </form>
+
+
+    <div id="result">
+
+
+    </div>
+
+</section>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="assets/helpers/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
