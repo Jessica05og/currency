@@ -16,65 +16,48 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+// function to connect the code to the API with the key.
+function callAPI(){
+	var http = new XMLHttpRequest();
 
-        console.log('Received Event: ' + id);
-    }
-};
+	// API KEY
+	const url = 'http://www.apilayer.net/api/live?access_key=c8425a3698beec07187f0c08f68fe568';
+	http.open("GET", url);
+	http.send();
+    // it gets the conversion from JSON format
+	http.onreadystatechange = (e) => {
+		var elementInputMoney = document.getElementById('inputMoney').value;
+		var response = http.responseText;
+		var responseJSON = JSON.parse(response);
+		var data = responseJSON.quotes;
+		var keys = Object.keys(data);
+		var quotesForView = "";
+		var quotesForResult = "";
+    // do the conversion
+			keys.forEach((element) =>{
+                quotesForView += "1 USD is equivalent to " + data[element] + "convertTo " + element
+                + "<br>";
 
+			});
+// call the function to show the result
+			display(quotesForView, quotesForResult);
 
-
-function ConvertCurrency(){
-    var from = document.getElementById("from").value;
-    var to = document.getElementById("to").value;
-
-    var xmlhttp = new XMLHttpRequest();
-    var url = "http://apilayer.net/api/live?access_key=a4d0b025566475406c6d3320ffd52e33&currencies="+from+"&source="+to+"&format=1";
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-
-
-    http.onreadystatechange = (e) => {
-    var response = http.responseText
-    var responseJSON = JSON.parse(response);
-    var data = responseJSON.quotes;
-    var keys = Object.keys(data);
-    var quotesForView = "";
-    keys.forEach((element) =>{
-    quotesForView += "1 USD is equivalent to " + data[element] + " " + element
-    + "<br>";
-    });
-    document.getElementById('result').innerHTML = quotesForView;
-    }
-
-
+	}
 }
 
 
+// it recives the quotesForView and quotesForResult
 
+
+function display(quotesForView, quotesForResult){
+	// Get Values
+	var elementInputMoney = document.getElementById('inputMoney').value;
+	var elementDisplayConvertFrom = document.getElementById('convertFrom');
+	var elementDisplayConvertTo = document.getElementById('convertTo');
+
+	// Display Values
+	elementDisplayConvertFrom.innerHTML = quotesForView;
+	elementDisplayConvertTo.innerHTML = quotesForView;
+
+}
